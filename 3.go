@@ -14,7 +14,7 @@ func calcSumDirect(pathDirectory string) (int64, error) {
 		return 0, err
     }
     //суммарный размер директории    
-	var sum int64 = 0
+	var sum int64 
     //проход по кадому файлу
     for _, file := range files {
         //формирование нового пути к внутренней директории и рекурсивный вызов        
@@ -63,9 +63,8 @@ func printFileDetails(files []os.DirEntry, mdir string) {
 		tip := " "                  // Тип
 		if isDirectory {            // Обновление описания типа в зависимости от того, является ли оно директорией
 			tip = "Директория"
-
 			directsum, err := calcSumDirect(fmt.Sprintf("%s/%s", mdir , file.Name()))
-			size+=directsum
+			size+=directsum //суммируем размеры
 			if err != nil {          // Обработка ошибок при получении информации о файле
 				fmt.Printf("Не удалось получить размер дирректории '%s': %v\n", file.Name(), err)
 				continue}
